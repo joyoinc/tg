@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  form( method="post")
+    div
+      div
+        span Account :
+        input(type="text", name="account")
+      div
+        span Email :
+        input(type="text", name="email")
+      div
+        input(type="submit", value="Create")

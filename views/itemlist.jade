@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+  table.table.table-hover
+    thead
+      tr
+        th.span1 #
+        th.span7 item summary
+        th.span4 create time
+    tbody
+      each item, i in items
+        tr
+          td= i+1
+          td 
+            a(href="/workitem/"+item._id)!= item.title
+          - var s=''
+          - var ts = Date.parse(item.created_at)
+          - if(isNaN(ts)==false) {
+          -   console.log(ts)
+          -   var dd = new Date(ts)
+          -   console.log(dd)
+          -   s = dd.getMonth()+1 + '/' + dd.getDate() + '::' + dd.getHours() + ':' + dd.getMinutes()
+          - }
+          td= s

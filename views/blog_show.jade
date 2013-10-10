@@ -1,0 +1,23 @@
+extends layout
+  
+block content
+  script(type='text/javascript', src='/javascripts/blog_show.js')
+ 
+  table.table
+    tr.info
+      td= article.title
+    tr.main-content
+      td= article.body
+    tr
+      td
+        div#comments
+          each o,idx in article.comments
+            div= o.comment
+              i.icon-trash.pull-right
+       
+  form( method="post")
+    div.control-group
+      div.controls
+        textarea.span12( name="content", rows=5, id="editArticleBody")
+      div#editArticleSubmit
+        input(type="submit", value="Send")
