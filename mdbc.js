@@ -17,13 +17,19 @@ Mdbc.prototype.addWorkItem= function(item, callback) {
 
 Mdbc.prototype.allWorkItems= function(callback) {
   this.db.collection('workitem').find().toArray(function(err, result) {
-    callback(null, result)
+    if(err)
+      callback(err, result)
+    else
+      callback(null, result)
   })
 }
 
 Mdbc.prototype.allWorkItemsByCreated= function(callback) {
   this.db.collection('workitem').find().sort({created_at:-1}).toArray(function(err, result) {
-    callback(null, result)
+    if(err)
+      callback(err, result)
+    else
+      callback(null, result)
   })
 }
 

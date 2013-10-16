@@ -19,7 +19,8 @@ app.configure('development', function(){
 });
 
 app.configure('production', function(){
-  GLOBAL.connStr = 'mongodb://heroku_app18564124:6558j5ooiplu2600d21rjrdj5n@ds049548.mongolab.com:49548/heroku_app18564124'
+  //GLOBAL.connStr = 'mongodb://heroku_app18564124:6558j5ooiplu2600d21rjrdj5n@ds049548.mongolab.com:49548/heroku_app18564124'
+  GLOBAL.connStr = 'mongodb://xxd:xxd@ds049538.mongolab.com:49538/tinygroup'
   //var connStr = 'mongodb://xxd:xxd@ds049538.mongolab.com:49538/tinygroup'
   //var connStr = 'mongodb://heroku_app18564124:6558j5ooiplu2600d21rjrdj5n@ds049548.mongolab.com:49548/heroku_app18564124';
 
