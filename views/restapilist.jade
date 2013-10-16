@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  table.table
+    thead
+      tr
+        th.col-md-1 status
+        th.col-md-1 method
+        th.col-md-11 rest api
+    tbody
+        tr
+          td v
+          td GET
+          td: a(href="/r/allWorkItems") /r/allWorkItems
+        tr
+          td v
+          td POST
+          td: a(href="#") /r/addWorkItem
+        tr
+          td v
+          td DELETE
+          td: a(href="#") /r/delWorkItem/:id

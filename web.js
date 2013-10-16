@@ -1,6 +1,7 @@
 var express = require('express');
 var Mdbc = require('./Mdbc').Mdbc
 var routes= require('./routes')
+var restapi= require('./routes/restapi')
 var app = express();
 
 app.configure(function(){
@@ -25,7 +26,16 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.workitemlist)
+app.get('/s/allRestfulApi', restapi.getAllAPIs)
+app.get('/r/allWorkItems', restapi.allWorkItems)
+app.post('/r/addWorkItem', restapi.addWorkItem)
+app.delete('/r/delWorkItem/:id', restapi.delWorkItem)
+
+app.get('/', routes.index)
+app.get('/workitem/new', routes.newitem)
+//app.get('/workitem/list', routes.workitemlist)
+app.post('/workitem/new', routes.donewitem)
+
 /*
 app.get('/user/new', function(req, res) {
   res.render('user_new.jade', {
@@ -38,21 +48,6 @@ app.post('/user/new', function(req, res){
     account: req.param('account'),
     email: req.param('email'),
     passwd: '123456'
-  }, function( error, docs) {
-    res.redirect('/')
-  });
-});
-
-app.get('/blog/new', function(req, res) {
-  res.render('blog_new.jade', {
-    title: 'New Post'
-  });
-});
-
-app.post('/blog/new', function(req, res){
-  articleProvider.save({
-    title: req.param('title'),
-    body: req.param('body')
   }, function( error, docs) {
     res.redirect('/')
   });

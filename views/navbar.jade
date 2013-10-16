@@ -1,6 +1,5 @@
-div.navbar
-  div.navbar-inner
-    ul.nav
-      li: a(href="/") Home
-      li: a(href="/blog/new") New Post
-      li: a(href="#") New Link
+ul.nav.nav-tabs
+  li: a#home(href="#", dest="/") Home
+  li: a#itemlist(href="#", dest="/r/allWorkItems") All Work items
+  li: a#newitem(href="/workitem/new") New Work item
+  li: a#restapilist(href="/s/allRestfulApi") Completed Restful API

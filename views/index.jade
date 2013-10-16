@@ -2,10 +2,3 @@ extends layout
 
 block content
   h1= title
-  #articles
-    each article, i in articles
-      div.row
-        div.span1= i+1
-        div.span7 
-          a(href="/blog/"+article._id)!= article.title
-        div.span4= article.created_at

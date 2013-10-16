@@ -1,18 +1,17 @@
 doctype 5
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/my.css')
+    link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css')
     script(type='text/javascript', src='http://code.jquery.com/jquery.js')
-    script(type='text/javascript', src='/javascripts/bootstrap.min.js')
+    script(type='text/javascript', src='//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
     script(type='text/javascript', src='/javascripts/holder.js')
+    script(type='text/javascript', src='/javascripts/my.js')
   body
     div.container
-      div.masthead
-        h1
-          img(data-src='holder.js/100%x59')
-        include navbar
-                
+      h1
+        img(data-src='holder.js/100%x59')
+      include navbar
+
       div.jumbotron
         block content
