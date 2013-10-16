@@ -1,5 +1,5 @@
 
-var Mdbc = require('../Mdbc').Mdbc
+var Mdbc = require('../mdbc').Mdbc
 
 exports.getAllAPIs = function(req, res){
   res.render('restapilist')

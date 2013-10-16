@@ -1,4 +1,4 @@
-var Mdbc = require('./Mdbc').Mdbc
+var Mdbc = require('./mdbc').Mdbc
 var mdbc = new Mdbc()
 
 mdbc.initWorkItem(function(err){

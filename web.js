@@ -1,5 +1,5 @@
 var express = require('express');
-var Mdbc = require('./Mdbc').Mdbc
+var Mdbc = require('./mdbc').Mdbc
 var routes= require('./routes')
 var restapi= require('./routes/restapi')
 var app = express();
