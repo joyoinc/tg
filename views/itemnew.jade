@@ -1,12 +1,15 @@
 extends layout
 
+block navbar
+  include navbar
+
 block content
   h1= title
   form.form-horizontal(method="post")
     div.form-group
-      label.col-lg-2.control-label(for="inputTitle") Title
+      label.col-lg-2.control-label(for="title") Title
       div.col-lg-10
-        input#inputTitle.form-control(type="text", placeholder="Input the title", name="inputTitle")
+        input#title.form-control(type="text", placeholder="Input the title", name="title")
     div.form-group
       div.col-lg-offset-2.col-lg-10
         button.btn.btn-default(type="submit") Save

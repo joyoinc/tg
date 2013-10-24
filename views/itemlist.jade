@@ -1,25 +1,27 @@
 extends layout
 
+block navbar
+  include navbar
+
 block content
-  h1= title
   table.table.table-hover
     thead
       tr
-        th.span1 #
-        th.span7 item summary
-        th.span4 create time
+        th.col-xs-3 title
+        th.col-xs-3 detail link
+        th.col-xs-2 due date
+        th.col-xs-2 last change
+        th.col-xs-1 
+        th.col-xs-1 
+        th.col-xs-1
     tbody
-      each item, i in items
-        tr
-          td= i+1
-          td 
-            a(href="/workitem/"+item._id)!= item.title
-          - var s=''
-          - var ts = Date.parse(item.created_at)
-          - if(isNaN(ts)==false) {
-          -   console.log(ts)
-          -   var dd = new Date(ts)
-          -   console.log(dd)
-          -   s = dd.getMonth()+1 + '/' + dd.getDate() + '::' + dd.getHours() + ':' + dd.getMinutes()
-          - }
-          td= s
+      each item in items
+        tr(itemId= item._id)
+          td= item.title
+          td
+            a(href= item.detailLink)!= item.detailLink
+          td= item.dueDate
+          td= item.lastChange
+          td
+          td
+          td(status= item.statusCode)

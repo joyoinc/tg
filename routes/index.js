@@ -1,5 +1,7 @@
 
 var restapi = require('./restapi')
+//var WorkItemProvider = require('../model_accessor/workItemProvider-mem').WorkItemProvider
+var WorkItemProvider = require('../model_accessor/workItemProvider-db').WorkItemProvider
 /*
  * GET home page.
  */
@@ -16,16 +18,14 @@ exports.donewitem = function(req, res){
   restapi.addWorkItem(req, res)
   res.redirect("/")
 };
-/*
 
 exports.workitemlist = function(req, res){
-  var mdbc = new Mdbc()
-  mdbc.allWorkItemsByCreated(function(err, result){
+  var workItemProvider = new WorkItemProvider()
+  workItemProvider.allWorkItems(function(err, result){
       if(err) throw err
       else {
-        res.render('itemlist.jade', { title: 'Workitem list', items:result})
+        res.render('itemlist.jade', {items:result})
       }
   })
 };
 
-*/

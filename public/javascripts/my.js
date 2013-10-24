@@ -11,7 +11,6 @@ $(document).ready(function(){
       })
     }
   })
-
 })
 
 function data2htmlview(data, restapiname)

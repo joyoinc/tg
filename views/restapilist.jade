@@ -1,6 +1,11 @@
 extends layout
 
+block navbar
+  include navbar
+
 block content
+  h3
+    != "curl -X [Method] -H 'content-type:application/json' -d '{}' localhost:3000/rest/api"
   table.table
     thead
       tr
@@ -8,6 +13,22 @@ block content
         th.col-md-1 method
         th.col-md-11 rest api
     tbody
+        tr
+          td v
+          td GET
+          td: a(href="/r/iUser/auth/:name/:passwd") /r/iUser/auth/:name/:passwd
+        tr
+          td v
+          td PUT
+          td: a(href="#") /r/iUser/resetPasswd
+        tr
+          td v
+          td POST
+          td: a(href="#") /r/addiUser
+        tr
+          td v
+          td GET
+          td: a(href="/r/alliUsers/") /r/alliUsers/
         tr
           td v
           td GET
