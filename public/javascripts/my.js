@@ -43,11 +43,28 @@ function _(data) {
   return 'Home Page'
 }
 
+function statusP1(_this) {
+  var s = parseInt($(_this).attr('status')) + 1
+  if(s>5) s=1
+  var oTR = $(_this).parent()
+  var params = [ $(oTR).attr('itemId') , s ]
+  var url = '/workitem/changeStatus/' + params.join('/')
+  $.ajax(url, {type:'put'}).done(function(data) {
+  })
+  $(_this).attr('status', s)
+}
+
+function edtWorkItem(_this) {
+  var oTR = $(_this).parent().parent()
+  var url = '/workitem/' + $(oTR).attr('itemId')
+  document.location.href = url
+}
+
 function delWorkItem(_this) {
-  var url = '/r/delWorkItem/' + $(_this).parent().attr('itemId')
+  var oTR = $(_this).parent().parent()
+  var url = '/r/delWorkItem/' + $(oTR).attr('itemId')
   $.ajax(url, {type:'delete'}).done(function(data) {
-    //console.log(data)
-    $('a#itemlist').click()
+    $(oTR).remove()
   })
 }
 

@@ -22,7 +22,7 @@ WorkItemProvider.prototype.delWorkItem= function(id, callback) {}
 
 WorkItemProvider.prototype.addWorkItem= function(obj, callback) {}
 
-WorkItemProvider.prototype.allWorkItemsByCreated= function(callback) {}
+WorkItemProvider.prototype.allWorkItemsByLastChange= function(callback) {}
 
 WorkItemProvider.prototype.allWorkItems= function(callback) {
   callback(null, data)

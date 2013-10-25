@@ -1,5 +1,6 @@
 
 var Mdbc = require('../mdbc').Mdbc
+var WorkItemProvider = require('../model_accessor/workItemProvider-db').WorkItemProvider
 
 exports.getAllAPIs = function(req, res){
   res.render('restapilist')
@@ -89,15 +90,12 @@ exports.addWorkItem = function(req, res){
 };
 
 exports.delWorkItem = function(req, res){
-  var mdbc = new Mdbc()
   var id = req.param('id')
-  mdbc.delWorkItem( id , function(err, result){
-      if(err)
-        throw err
-      else {
-        var msg = '[Del] workitem'
-        res.send(msg);
-        console.log(msg)
-      }
+  var workItemProvider = new WorkItemProvider()
+  workItemProvider.delWorkItem( id , function(err, result){
+    if(err) throw err
+    var logmsg = '[Del] workitem' + id
+    console.log(logmsg)
+    res.send(logmsg)
   })
 }

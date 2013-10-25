@@ -27,14 +27,14 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-var checkSession = function(req, res, next) {
+var checkLogin = function(req, res, next) {
   if(req.cookie && req.cookie.authUser)
     next();
   else
     res.redirect('/')
 }
 
-app.get('/s/allRestfulApi', restapi.getAllAPIs)
+app.get('/s/allRestfulApi', checkLogin, restapi.getAllAPIs)
 app.get('/r/alliUsers', restapi.alliUsers)
 app.get('/r/allWorkItems', restapi.allWorkItems)
 app.post('/r/addWorkItem', restapi.addWorkItem)
@@ -43,13 +43,15 @@ app.delete('/r/delWorkItem/:id', restapi.delWorkItem)
 app.put('/r/iUser/resetPasswd', restapi.iUserResetPasswd)
 app.get('/r/iUser/auth/:name/:passwd', restapi.authiUser)
 
-app.get('/workitem/new', checkSession, routes.newitem)
-app.get('/workitem/list', routes.workitemlist)
-app.post('/workitem/new', routes.donewitem)
+app.get('/workitem/new', routes.newItem)
+app.get('/workitem/list', routes.workItemList)
+app.post('/workitem/new', routes.doNewItem)
+app.get('/workitem/:id', routes.editItem)
+app.put('/workitem/update/:id', routes.doEditItem)
+app.put('/workitem/changeStatus/:id/:status', routes.doEditItemStatus)
 app.get('/', routes.index)
 
 /*
-app.get('/workitem/list', routes.workitemlist)
 
 app.get('/user/new', function(req, res) {
   res.render('user_new.jade', {

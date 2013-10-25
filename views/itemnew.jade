@@ -8,8 +8,15 @@ block content
   form.form-horizontal(method="post")
     div.form-group
       label.col-lg-2.control-label(for="title") Title
+      div.col-lg-6
+        input.form-control(type="text", placeholder="Input the title", name="title")
+      label.col-lg-2.control-label(for="dueDate") Due Date
+      div.col-lg-2
+        input.form-control(type="text", placeholder="", name="dueDate")
+    div.form-group
+      label.col-lg-2.control-label(for="detailLink") Detail
       div.col-lg-10
-        input#title.form-control(type="text", placeholder="Input the title", name="title")
+        input.form-control(type="text", placeholder="", name="detailLink")
     div.form-group
       div.col-lg-offset-2.col-lg-10
         button.btn.btn-default(type="submit") Save

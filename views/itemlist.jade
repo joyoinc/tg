@@ -4,7 +4,7 @@ block navbar
   include navbar
 
 block content
-  table.table.table-hover
+  table.table
     thead
       tr
         th.col-xs-3 title
@@ -23,5 +23,7 @@ block content
           td= item.dueDate
           td= item.lastChange
           td
+            a.glyphicon.glyphicon-pencil(onclick='edtWorkItem(this)')
           td
-          td(status= item.statusCode)
+            a.glyphicon.glyphicon-trash(onclick='delWorkItem(this)')
+          td(status= item.statusCode , onclick='statusP1(this)')
