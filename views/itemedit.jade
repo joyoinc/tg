@@ -1,0 +1,23 @@
+extends layout
+
+block navbar
+  include navbar
+
+block content
+  h1= title
+  form.form-horizontal(method="post", action="/workitem/update/" + item._id)
+    input(type='hidden', name='_method', value='PUT')
+    div.form-group
+      label.col-sm-2.control-label(for="title") Title
+      div.col-sm-6
+        input.form-control(type="text", name="title", value= item.title)
+      label.col-sm-2.control-label(for="dueDate") Due Date
+      div.col-sm-2
+        input.form-control(type="text", name="dueDate", value= item.dueDate)
+    div.form-group
+      label.col-sm-2.control-label(for="detailLink") Detail
+      div.col-sm-10
+        input.form-control(type="text", name="detailLink", value= item.detailLink)
+    div.form-group
+      div.col-sm-offset-2.col-sm-10
+        button.btn.btn-default(type="submit") Save
