@@ -3,6 +3,7 @@ td[status='2'] {background-color:#3366ff;}
 td[status='3'] {background-color:#00ffcc;}
 td[status='4'] {background-color:#ff9933;}
 td[status='5'] {background-color:#ff3300;}
+td[status='100'] {background-color:#cccccc;}
 .table td { border-bottom: 1px solid #ddd ; }
 .table .main-content { height: 150px; }
 .jumbotron { margin-top:5px; }

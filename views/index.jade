@@ -4,4 +4,16 @@ block navbar
   include navbar
 
 block content
-  h1 Home Page
+  
+  form.form-horizontal(method="post", action="/iUser/auth")
+    div.form-group
+      label.col-lg-2.control-label(for="account") Account/Email
+      div.col-lg-10
+        input.form-control(type="text", placeholder="Input account or email", name="account")
+    div.form-group
+      label.col-lg-2.control-label(for="passwd") Password
+      div.col-lg-10
+        input.form-control(type="password", placeholder="Password", name="passwd")
+    div.form-group
+      div.col-lg-offset-2.col-lg-10
+        button.btn.btn-default(type="submit") Sign in

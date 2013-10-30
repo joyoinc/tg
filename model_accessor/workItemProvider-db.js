@@ -33,6 +33,34 @@ WorkItemProvider.prototype.addWorkItem= function(obj, callback) {
   this.db.collection('workitem').insert(obj,{},callback)
 }
 
+WorkItemProvider.prototype.allLiveWorkItemsByLastChange= function(callback) {
+  this.db.collection('workitem').find({statusCode:{$in:[1,2,3,4,5]}})
+  .sort({lastChange:-1}).toArray(function(err, results) {
+    if(err)
+      callback(err, results)
+    else {
+      results.forEach(function(elem, index, array){
+        workitemSlug(elem)
+      })
+      callback(null, results)
+    }
+  })
+}
+
+WorkItemProvider.prototype.allFrozenWorkItems= function(callback) {
+  this.db.collection('workitem').find({statusCode:{$not:{$in:[1,2,3,4,5]}}})
+  .sort({lastChange:-1}).toArray(function(err, results) {
+    if(err)
+      callback(err, results)
+    else {
+      results.forEach(function(elem, index, array){
+        workitemSlug(elem)
+      })
+      callback(null, results)
+    }
+  })
+}
+
 WorkItemProvider.prototype.allWorkItemsByLastChange= function(callback) {
   this.db.collection('workitem').find().sort({lastChange:-1}).toArray(function(err, results) {
     if(err)

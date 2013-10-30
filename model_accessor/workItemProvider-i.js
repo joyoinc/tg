@@ -11,6 +11,10 @@ WorkItemProvider.prototype.addWorkItem= function(obj, callback) {}
 
 WorkItemProvider.prototype.allWorkItemsByLastChange= function(callback) {}
 
+WorkItemProvider.prototype.allLiveWorkItemsByLastChange= function(callback) {}
+
+WorkItemProvider.prototype.allFrozenWorkItems= function(callback) {}
+
 WorkItemProvider.prototype.allWorkItems= function(callback) {}
 
 WorkItemProvider.prototype.findById= function(id, callback) {}

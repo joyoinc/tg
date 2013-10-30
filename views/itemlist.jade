@@ -13,6 +13,7 @@ block content
         th.col-xs-2 last change
         th.col-xs-1 
         th.col-xs-1 
+        th.col-xs-1 
         th.col-xs-1
     tbody
       each item in items
@@ -23,7 +24,18 @@ block content
           td= item.dueDate
           td= item.lastChange
           td
-            a.glyphicon.glyphicon-pencil(onclick='edtWorkItem(this)')
+            if live && user
+              a.glyphicon.glyphicon-pencil(onclick='edtWorkItem(this)')
           td
-            a.glyphicon.glyphicon-trash(onclick='delWorkItem(this)')
-          td(status= item.statusCode , onclick='statusP1(this)')
+            if live && user
+              a.glyphicon.glyphicon-trash(onclick='delWorkItem(this)')
+          td
+            if user
+              if live
+                a.glyphicon.glyphicon-folder-close(onclick='statusClose(this)')
+              else
+                a.glyphicon.glyphicon-folder-open(onclick='statusOpen(this)')
+          if user 
+            td(status= item.statusCode , onclick='statusP1(this)')
+          else 
+            td(status= item.statusCode , onclick='')

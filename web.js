@@ -8,6 +8,7 @@ app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.bodyParser());
+  app.use(express.cookieParser('my$ecret'));
   app.use(express.methodOverride());
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
   app.use(express.static(__dirname + '/public'));
@@ -27,14 +28,15 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-var checkLogin = function(req, res, next) {
-  if(req.cookie && req.cookie.authUser)
+var checkiUser = function(req, res, next) {
+  if(req.cookies && req.cookies.iUser){
     next();
+  }
   else
     res.redirect('/')
 }
 
-app.get('/s/allRestfulApi', checkLogin, restapi.getAllAPIs)
+app.get('/s/allRestfulApi', checkiUser, restapi.getAllAPIs)
 app.get('/r/alliUsers', restapi.alliUsers)
 app.get('/r/allWorkItems', restapi.allWorkItems)
 app.post('/r/addWorkItem', restapi.addWorkItem)
@@ -43,12 +45,13 @@ app.delete('/r/delWorkItem/:id', restapi.delWorkItem)
 app.put('/r/iUser/resetPasswd', restapi.iUserResetPasswd)
 app.get('/r/iUser/auth/:name/:passwd', restapi.authiUser)
 
-app.get('/workitem/new', routes.newItem)
-app.get('/workitem/list', routes.workItemList)
+app.get('/workitem/new', checkiUser, routes.newItem)
+app.get('/workitem/list/:live', routes.workItemList)
 app.post('/workitem/new', routes.doNewItem)
 app.get('/workitem/:id', routes.editItem)
 app.put('/workitem/update/:id', routes.doEditItem)
 app.put('/workitem/changeStatus/:id/:status', routes.doEditItemStatus)
+app.post('/iUser/auth', routes.authUser)
 app.get('/', routes.index)
 
 /*
