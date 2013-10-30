@@ -3,4 +3,8 @@ ul.nav.nav-tabs
   li: a#itemlist(href="/workitem/list/y") All Work items
   li: a#itemlist(href="/workitem/list/n") Completed Work items
   li: a#newitem(href="/workitem/new") New Work item
-  li: a#restapilist(href="/s/allRestfulApi") Completed Restful API
+  li.dropdown
+    a.dropdown-toggle(data-toggle="dropdown", href="#") Functions
+      span.caret
+    ul.dropdown-menu
+      li: a#restapilist(href="/s/allRestfulApi") Completed Restful API

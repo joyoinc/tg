@@ -25,16 +25,16 @@ block content
           td= item.lastChange
           td
             if live && user
-              a.glyphicon.glyphicon-pencil(onclick='edtWorkItem(this)')
+              a.glyphicon.glyphicon-pencil(onclick='edtWorkItem(this)', title='edit item')
           td
             if live && user
-              a.glyphicon.glyphicon-trash(onclick='delWorkItem(this)')
+              a.glyphicon.glyphicon-trash(onclick='delWorkItem(this)', title='delete item')
           td
             if user
               if live
-                a.glyphicon.glyphicon-folder-close(onclick='statusClose(this)')
+                a.glyphicon.glyphicon-folder-close(onclick='statusClose(this)', title='close item')
               else
-                a.glyphicon.glyphicon-folder-open(onclick='statusOpen(this)')
+                a.glyphicon.glyphicon-folder-open(onclick='statusOpen(this)', title='open item')
           if user 
             td(status= item.statusCode , onclick='statusP1(this)')
           else 
