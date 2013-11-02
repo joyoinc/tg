@@ -1,0 +1,34 @@
+extends layout
+
+block navbar
+  include navbar
+
+block content
+  h1
+  form.form-horizontal(method="post")
+    div.form-group
+      label.col-lg-2.control-label(for="receiver") To
+      div.col-lg-10
+        input.form-control(type="email", placeholder="Receiver Email", name="receiver")
+    div.form-group
+      label.col-lg-2.control-label(for="subject") Subject
+      div.col-lg-10
+        input.form-control(type="text", placeholder="Subject", name="subject")
+    div.form-group
+      label.col-lg-2.control-label(for="body") Body
+      div.col-lg-10
+        textarea.form-control(row=3, name="body")
+    div.form-group
+      div.col-lg-offset-2.col-lg-10
+        button.btn.btn-default(type="submit") Send
+
+  div.alert.alert-success= msg.succ
+  div.alert.alert-danger= msg.fail
+  script
+    $("div.alert").each(function(){
+      if($(this).text().length>0)
+        $(this).fadeOut(5000)
+      else
+        $(this).remove()
+    })
+

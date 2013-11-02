@@ -1,5 +1,3 @@
-
-var restapi = require('./restapi')
 //var WorkItemProvider = require('../model_accessor/workItemProvider-mem').WorkItemProvider
 var WorkItemProvider = require('../model_accessor/workItemProvider-db').WorkItemProvider
 var UserProvider = require('../model_accessor/userProvider-mem').UserProvider
@@ -107,5 +105,45 @@ exports.authUser = function(req, res) {
         res.redirect('/workitem/list/y')
       }
   })
-
 };
+
+exports.sendMail = function(req, res) {
+  res.render('simplemail',{msg:{succ:'',fail:''}})
+}
+
+exports.doSendMail = function(req, res) {
+  var nodemailer = require("nodemailer")
+  var smtpTransport = nodemailer.createTransport("SMTP", {
+    service: "Gmail",
+    auth: { user: "super.int2013@gmail.com", pass: "SI2013@yx" }
+  })
+  smtpTransport.sendMail(
+  /*
+  {
+    from: "super.int2013@gmail.com",
+    to: "Yuan Zhi <zhi.yuan.skywalker@gmail.com>",
+    subject: "Howdy!",
+    text: "Check TG out: floating-mountain-2831.herokuapp.com",
+    html: "Check <a href='http://floating-mountain-2831.herokuapp.com'>TG</a> out ",
+    attachments:[
+      {filePath: __dirname + "/a.txt"}
+    ]
+  }
+  */
+  {
+    from: "super.int2013@gmail.com",
+    to: req.param('receiver'),
+    subject: req.param('subject'),
+    text: req.param('body'),
+  }
+  , function(err, result){
+    if(err) {
+      console.log(err)
+      res.render('simplemail',{msg:{succ:'',fail:'send failed!'}})
+    }
+    else {
+      console.log("email sent:" + result.message)
+      res.render('simplemail',{msg:{succ:'send ok!',fail:''}})
+    }
+  })
+}

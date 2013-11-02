@@ -36,7 +36,10 @@ var checkiUser = function(req, res, next) {
     res.redirect('/')
 }
 
-app.get('/s/allRestfulApi', checkiUser, restapi.getAllAPIs)
+app.get('/f/allRestfulApi', checkiUser, restapi.getAllAPIs)
+app.get('/f/sendmail', checkiUser, routes.sendMail)
+app.post('/f/sendmail', checkiUser, routes.doSendMail)
+
 app.get('/r/alliUsers', restapi.alliUsers)
 app.get('/r/allWorkItems', restapi.allWorkItems)
 app.post('/r/addWorkItem', restapi.addWorkItem)
