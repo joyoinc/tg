@@ -1,3 +1,4 @@
+var bcrypt = require("bcrypt")
 
 var WorkItemProvider = require('../model_accessor/workItemProvider-db').WorkItemProvider
 var UserProvider = require('../model_accessor/userProvider-mem').UserProvider
@@ -5,6 +6,13 @@ var UserProvider = require('../model_accessor/userProvider-mem').UserProvider
 exports.getAllAPIs = function(req, res){
   res.render('restapilist')
 };
+
+exports.encrypt = function(req, res) {
+  var str = req.param('str')
+  var salt = bcrypt.genSaltSync()
+  var hash = bcrypt.hashSync(str, salt)
+  res.send(hash)
+}
 
 exports.iUserResetPasswd = function(req, res){
   var userProvider = new UserProvider()
