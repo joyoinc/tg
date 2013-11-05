@@ -25,6 +25,7 @@ exports.doNewItem= function(req, res){
   var workItemProvider = new WorkItemProvider()
   var obj = { title: req.param('title')
     , dueDate: req.param('dueDate')
+    , owner: req.param('owner')
     , detailLink: req.param('detailLink')
     , statusCode : 1
     , lastChange : new Date()
@@ -60,6 +61,7 @@ exports.doEditItem = function(req, res){
   var workItemProvider = new WorkItemProvider()
   var obj = { title: req.param('title')
     , dueDate: req.param('dueDate')
+    , owner: req.param('owner')
     , detailLink: req.param('detailLink')
     , lastChange: new Date()
   }

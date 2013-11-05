@@ -10,6 +10,7 @@ block content
         th.col-xs-3 title
         th.col-xs-3 detail link
         th.col-xs-2 due date
+        th.col-xs-2 owner
         th.col-xs-2 last change
         th.col-xs-1 
         th.col-xs-1 
@@ -22,6 +23,7 @@ block content
           td
             a(href= item.detailLink)!= item.detailLink
           td= item.dueDate
+          td= item.owner
           td= item.lastChange
           td
             if live && user

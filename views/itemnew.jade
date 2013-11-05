@@ -7,16 +7,19 @@ block content
   h1= title
   form.form-horizontal(method="post")
     div.form-group
-      label.col-lg-2.control-label(for="title") Title
-      div.col-lg-6
+      label.col-sm-2.control-label(for="title") Title
+      div.col-sm-6
         input.form-control(type="text", placeholder="Input the title", name="title")
-      label.col-lg-2.control-label(for="dueDate") Due Date
-      div.col-lg-2
+      label.col-sm-2.control-label(for="dueDate") Due Date
+      div.col-sm-2
         input.form-control(type="text", placeholder="", name="dueDate")
     div.form-group
-      label.col-lg-2.control-label(for="detailLink") Detail
-      div.col-lg-10
+      label.col-sm-2.control-label(for="owner") Owner
+      div.col-sm-4
+        input.form-control(type="text", placeholder="", name="owner")
+      label.col-sm-2.control-label(for="detailLink") Detail
+      div.col-sm-4
         input.form-control(type="text", placeholder="", name="detailLink")
     div.form-group
-      div.col-lg-offset-2.col-lg-10
+      div.col-sm-offset-2.col-sm-10
         button.btn.btn-default(type="submit") Save

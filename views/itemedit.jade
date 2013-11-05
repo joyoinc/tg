@@ -15,8 +15,11 @@ block content
       div.col-sm-2
         input.form-control(type="text", name="dueDate", value= item.dueDate)
     div.form-group
+      label.col-sm-2.control-label(for="owner") Owner
+      div.col-sm-4
+        input.form-control(type="text", name="owner", value= item.owner)
       label.col-sm-2.control-label(for="detailLink") Detail
-      div.col-sm-10
+      div.col-sm-4
         input.form-control(type="text", name="detailLink", value= item.detailLink)
     div.form-group
       div.col-sm-offset-2.col-sm-10
