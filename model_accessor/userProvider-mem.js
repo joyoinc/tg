@@ -3,6 +3,7 @@ var bcrypt = require("bcrypt")
 var iUsers = [
   {name:'xxd', passwd:'$2a$10$3jMz6eIqteQ8cHAHyby94OIcdvXBTUWBdArNnlIfLyEUhMjLyI2uC'} 
   , {name:'xzx', passwd:'$2a$10$4Rte3nQ4JQtC4UN6sv4l3.fMfi9KWJhLZxiEP/QiYg.IIvP014YVu'} 
+  , {name:'xhx', passwd:'$2a$10$4Rte3nQ4JQtC4UN6sv4l3.fMfi9KWJhLZxiEP/QiYg.IIvP014YVu'} 
   , {name:'zyy', passwd:'$2a$10$jNc3fYt1EiP7Ddp0DBPOsuxYnZk0zGwkpGpq3sneTVwlFMDMe0nCe'}
 ]
 
