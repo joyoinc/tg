@@ -13,6 +13,8 @@ WorkItemProvider.prototype.allWorkItemsByLastChange= function(callback) {}
 
 WorkItemProvider.prototype.allLiveWorkItemsByLastChange= function(callback) {}
 
+WorkItemProvider.prototype.ownerFilterLiveWorkItemsByLastChange= function(callback) {}
+
 WorkItemProvider.prototype.allFrozenWorkItems= function(callback) {}
 
 WorkItemProvider.prototype.allWorkItems= function(callback) {}

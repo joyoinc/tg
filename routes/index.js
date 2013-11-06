@@ -77,16 +77,20 @@ exports.doEditItem = function(req, res){
 exports.workItemList = function(req, res){
   var workItemProvider = new WorkItemProvider()
   var isLive = req.param('live') == 'y'
+  var iUser = ''
+  if(req.cookies && req.cookies.iUser) iUser = req.cookies.iUser
   var callback = function(err, result){
       if(err) throw err
       else {
-        var iUser = ''
-        if(req.cookies && req.cookies.iUser) iUser = req.cookies.iUser
         res.render('itemlist.jade', {items:result, user:iUser, live: isLive})
       }
   }
-  if(isLive)
-    workItemProvider.allLiveWorkItemsByLastChange(callback)
+  if(isLive) {
+    if(req.cookies && req.cookies.saUser)
+      workItemProvider.allLiveWorkItemsByLastChange(callback)
+    else
+      workItemProvider.ownerFilterLiveWorkItemsByLastChange(iUser, callback)
+  }
   else
     workItemProvider.allFrozenWorkItems(callback)
 };
@@ -103,6 +107,10 @@ exports.authUser = function(req, res) {
         if(result.errCode===0) {
           //console.log('pos1 ' + name)
           res.cookie('iUser', name, {maxAge:900000})
+          if(name==='xxd')
+            res.cookie('saUser', name, {maxAge:900000})
+          else
+            res.clearCookie('saUser')
         }
         res.redirect('/workitem/list/y')
       }
