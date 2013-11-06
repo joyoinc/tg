@@ -91,8 +91,12 @@ exports.workItemList = function(req, res){
     else
       workItemProvider.ownerFilterLiveWorkItemsByLastChange(iUser, callback)
   }
-  else
-    workItemProvider.allFrozenWorkItems(callback)
+  else {
+    if(req.cookies && req.cookies.saUser)
+      workItemProvider.allFrozenWorkItems(callback)
+    else
+      workItemProvider.ownerFilterFrozenWorkItems(iUser, callback)
+  }
 };
 
 exports.authUser = function(req, res) {
