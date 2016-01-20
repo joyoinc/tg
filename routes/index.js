@@ -1,14 +1,16 @@
 //var WorkItemProvider = require('../model_accessor/workItemProvider-mem').WorkItemProvider
-var WorkItemProvider = require('../model_accessor/workItemProvider-db').WorkItemProvider
-var UserProvider = require('../model_accessor/userProvider-mem').UserProvider
+//var WorkItemProvider = require('../model_accessor/workItemProvider-db').WorkItemProvider
+//var UserProvider = require('../model_accessor/userProvider-mem').UserProvider
 /*
  * GET home page.
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Home Page' });
+  //res.render('index', { title: 'Home Page' });
+  res.sendfile('/public/index.html');
 };
 
+/*
 exports.newItem = function(req, res){
   res.render('itemnew.jade', { title: 'New a work item' })
 };
@@ -132,7 +134,6 @@ exports.doSendMail = function(req, res) {
     auth: { user: "super.int2013@gmail.com", pass: "SI2013@yx" }
   })
   smtpTransport.sendMail(
-  /*
   {
     from: "super.int2013@gmail.com",
     to: "Yuan Zhi <zhi.yuan.skywalker@gmail.com>",
@@ -143,7 +144,6 @@ exports.doSendMail = function(req, res) {
       {filePath: __dirname + "/a.txt"}
     ]
   }
-  */
   {
     from: "super.int2013@gmail.com",
     to: req.param('receiver'),
@@ -161,3 +161,4 @@ exports.doSendMail = function(req, res) {
     }
   })
 }
+ * */
