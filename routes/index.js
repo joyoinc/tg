@@ -1,15 +1,17 @@
-//var WorkItemProvider = require('../model_accessor/workItemProvider-mem').WorkItemProvider
-//var WorkItemProvider = require('../model_accessor/workItemProvider-db').WorkItemProvider
-//var UserProvider = require('../model_accessor/userProvider-mem').UserProvider
 /*
  * GET home page.
  */
 
 exports.index = function(req, res){
-  //res.render('index', { title: 'Home Page' });
   res.sendfile('/public/index.html');
 };
 
+
+exports.question = function(req, res){
+  var id = req.param('id');
+  console.log(id);
+  res.render('question.jade', {qid:id});
+};
 /*
 exports.newItem = function(req, res){
   res.render('itemnew.jade', { title: 'New a work item' })

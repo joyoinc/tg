@@ -1,0 +1,31 @@
+doctype html
+html
+	head
+		script(type='text/javascript', src='http://code.jquery.com/jquery.js')
+	body
+		script.
+			function render(data) {
+				var html = "<div>" + data.title + "</div>";
+				html += data.details.map(function(d){
+				return "<div><i>" + d.name + "</i> : <b>" + d.detail + "</b> @" + d.create_at + "</div>";
+				});
+				$('#tmp1').html(html);
+			}
+			var urlroot = 'http://xx-rest.herokuapp.com/_apis';
+			$(document).ready(function(){
+				$.ajax({
+					type: 'GET',
+					url: urlroot + '/qq/question/#{qid}',
+					success: function(data) {
+						console.log(data);
+						render(data);
+					},
+					error: function(data) {
+						console.log(data.responseText);
+					},
+					complete: function(data) {
+					},
+				});
+			});
+		Question #{qid} :
+		div#tmp1

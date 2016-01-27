@@ -54,7 +54,8 @@ app.put('/workitem/update/:id', routes.doEditItem)
 app.put('/workitem/changeStatus/:id/:status', routes.doEditItemStatus)
 app.post('/iUser/auth', routes.authUser)
 */
-app.get('/', routes.index)
+app.get('/', routes.index);
+app.get('/q/:id', routes.question);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Server listening on ' + app.get('port'))

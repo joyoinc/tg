@@ -2,146 +2,86 @@
 <html>
 	<head>
 		<!--link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css"-->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-		<script src="https://fb.me/react-0.14.6.min.js"></script>
-		<script src="https://fb.me/react-dom-0.14.6.min.js"></script>
-
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.css"/>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.js"></script>
-		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-		
+		<script data-require="jquery@*" data-semver="2.1.4" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+		<script data-require="react@*" data-semver="0.14.2" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.2/react.min.js"></script>
+		<script data-require="react-jsx@*" data-semver="0.13.1" src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/JSXTransformer.js"></script>
+		<link data-require="bootstrap-css@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+    <script data-require="bootstrap@*" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<script type="text/babel">
-			var Person = React.createClass({
 
-				propTypes: {
-					name: React.PropTypes.string.isRequired,
-					isMale: React.PropTypes.bool
-				},
+		<div style="margin:50px auto;max-width:1120px;">
+			<div id="ph1" ></div>
+			<div id='message' class="alert alert-success" style="display:none;"></div>
+			<script type="text/jsx">
+				var urlroot = 'http://xx-rest.herokuapp.com/_apis';
 
-				getDefaultProps: function(){
-					return { name: '' }
-				},
+				var QQ = React.createClass({
+					_onSubmit: function(event) {
+						$('fieldset').attr('disabled','disabled');
 
-				getInitialState: function() {
-					return { value: 1}
-				},
+						var name1 = $('#name1').val();
+						var email1 = $('#email1').val();
+						var title1 = $('#title1').val();
+						var detail1 = $('#detail1').val();
 
-				render: function() {
-					var greeting = 'Hello';
-
-					if(this.props.name.length > 0) {
-						greeting = 'Hi ' + this.props.name ;
+						$.ajax({
+							type: 'POST',
+							async: true,
+							url: urlroot + '/qq/questions',
+							contentType: 'application/json; charset=utf-8',
+							dataType: 'json',
+							data: JSON.stringify({ name: name1, email: email1, questions:[{title: title1, detail: detail1}]}),
+							success: function(data) {
+								var t = "Question " + data[0].id + " submitted !";
+								$('#message').text(t).show();
+								$('#message').fadeOut(5000);
+								document.getElementById('form1').reset();
+							},
+							error: function(xhr, msg) {
+								console.log('error ' + xhr.responseText);
+							},
+							complete: function() {
+								console.log('complete');
+								$('fieldset').removeAttr('disabled');
+							}
+						});
+					},
+					render: function(){
+						return (
+						<form className="form-horizontal" id='form1'>
+							<fieldset>
+								<div className="form-group">
+									<div className="col-xs-4">
+										<input type="text" className="form-control" id="name1" placeholder="Your Name" />
+									</div>
+									<div className="col-xs-8">
+										<input type="email" className="form-control" id="email1" placeholder="Your Email" />
+									</div>
+								</div>
+								<div className="form-group">
+									<div className="col-xs-12">
+										<input type="text" className="form-control" id="title1" placeholder="Your Question" />
+									</div>
+								</div>
+								<div className="form-group">
+									<div className="col-xs-12">
+										<textarea id="detail1" className="form-control" placeholder="Enter some details" rows="5"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-10">
+										<button type="button" className="btn btn-success" onClick={this._onSubmit} >Submit</button>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+						);
 					}
+				});
 
-					return (
-						<div>
-							<div>{greeting} ! Thanks for your Questions</div>
-						</div>
-					)
-				}
-			});
-
-			var Question = React.createClass({
-				render: function() {
-					return (
-						<a className='item'>
-							<i className='right triangle icon'></i>
-							<div className='content'>
-								<div className='header'>{this.props.title}</div>
-								<div className='description'>{this.props.detail}</div>
-							</div>
-						</a>
-					)
-				}
-			});
-
-			var Questions = React.createClass({
-				getInitialState: function(){
-					return { qs: [] }
-				},
-
-				_addOneQuestion: function() {
-					var title = $('#title').val();
-					var detail = $('#detail').val();
-
-					if(title.match(/^\s*$/)) {
-						$('#title').parent().addClass('error');
-						return false;
-					}
-
-					var qs = this.state.qs;
-					qs.push({title:title, detail:detail});
-					this.setState( { qs: qs } );
-				},
-
-				_add: function() {
-					console.log('clicked');
-				},
-				
-				render: function() {
-					return (
-						<div>
-							<div className='ui button' onClick={this._addOneQuestion}>Add another</div>
-							<div className='ui list'>
-							{this.state.qs.map(function(q){
-								return (<Question title={q.title} detail={q.detail} />);
-							})}
-							</div>
-						</div>
-					)
-				}
-			});
-
-			ReactDOM.render(
-				<Person name='adam' />,
-				document.getElementById('tmpl1')
-			);
-
-			ReactDOM.render(
-				<Questions />,
-				document.getElementById('tmpl2')
-			);
-
-		</script>
-
-		<div class='main ui container'>
-			<form class='ui form' style='padding-top: 3em'>
-				<h4 id='tmpl1' class='ui dividing header'></h4>
-				<div class='field'>
-					<label>How we contact you ?</label>
-					<div class='inline fields'>
-						<div class='four wide field'>
-							<input id='firstName' type='text' placeholder='Your First Name'>
-						</div>
-						<div class='four wide field'>
-							<input id='lastName' type='text' placeholder='Your Last Name'>
-						</div>
-						<div class='eight wide field'>
-							<input id='email' type='text' placeholder='Your Email'>
-						</div>
-					</div>
-				</div>
-				<div class='field'>
-					<label>What's your Question ?</label>
-					<div class='field'>
-						<input id='title' type='text' placeholder='Your Question Title'>
-					</div>
-				</div>
-				<div class='field'>
-					<label>Can you provide more details ?</label>
-					<div class='field'>
-						<textarea id='detail' rows='3' placeholder='Details'></textarea>
-					</div>
-				</div>
-				<div class='ui primary button'>Submit</div>
-				<h4  class='ui dividing header'></h4>
-			</form>
-
-			<div id='tmpl2' style='padding-top:10px;'></div>
+				React.render(<QQ />,document.getElementById('ph1'));
+			</script>
 		</div>
 	</body>
 </html>
